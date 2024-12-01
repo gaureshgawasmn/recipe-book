@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Ingredient } from '../../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -12,10 +12,10 @@ import { Ingredient } from '../../shared/ingredient.model';
 export class ShoppingEditComponent {
   name: string = '';
   amount: number = 0;
-  @Output() ingredientAdded = new EventEmitter<Ingredient>();
+  private shoppingListService = inject(ShoppingListService);
 
   addIngredient() {
-    this.ingredientAdded.emit({
+    this.shoppingListService.addIngredient({
       name: this.name,
       amount: this.amount,
     });

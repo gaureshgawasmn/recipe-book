@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 
 @Component({
@@ -10,18 +11,14 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
   styleUrl: './recipe-list.component.css',
 })
 export class RecipeListComponent {
-  recipes: Recipe[] = [
-    {
-      name: 'Test Recipe',
-      description: 'A test recipe',
-      imgPath:
-        'https://i0.wp.com/picjumbo.com/wp-content/uploads/korean-bibimbap-flatlay.jpg?w=2210&quality=70',
-    },
-  ];
+  recipes: Recipe[] = [];
+  private recipeService = inject(RecipeService);
 
-  @Output() recipeSelect = new EventEmitter<Recipe>();
+  ngOnInit() {
+    this.recipes = this.recipeService.recipes();
+  }
 
   onRecipeSelect(recipe: Recipe) {
-    this.recipeSelect.emit(recipe);
+    this.recipeService.selectRecipe(recipe);
   }
 }
