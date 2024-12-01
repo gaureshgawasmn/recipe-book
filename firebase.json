@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "dist/recipe-book/browser",
+    "site": "gg-recipe-book",
     "ignore": [
       "firebase.json",
       "**/.*",
