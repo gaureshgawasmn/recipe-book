@@ -1,16 +1,15 @@
-import { EventEmitter, Injectable, signal } from '@angular/core';
-import { Recipe } from './recipe.model';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  recipeSelected = new EventEmitter<Recipe>();
-  private recipesP = signal([
+  private readonly recipesP = signal([
     {
       name: 'Spaghetti Bolognese',
       description: 'A classic Italian pasta dish with a rich meat sauce.',
-      imgPath: 'https://t4.ftcdn.net/jpg/02/40/99/19/360_F_240991913_c22j6WvLgpqiUvjaLiLc5rh14WO8jShB.jpg',
+      imgPath:
+        'https://t4.ftcdn.net/jpg/02/40/99/19/360_F_240991913_c22j6WvLgpqiUvjaLiLc5rh14WO8jShB.jpg',
       ingredients: [
         { name: 'Spaghetti', amount: 200 },
         { name: 'Ground Beef', amount: 300 },
@@ -25,7 +24,8 @@ export class RecipeService {
       name: 'Chicken Caesar Salad',
       description:
         'A refreshing salad with grilled chicken and Caesar dressing.',
-      imgPath: 'https://i0.wp.com/smittenkitchen.com/wp-content/uploads/2008/01/chicken-caesar-salad-1-scaled.jpg?fit=1200%2C800&ssl=1',
+      imgPath:
+        'https://i0.wp.com/smittenkitchen.com/wp-content/uploads/2008/01/chicken-caesar-salad-1-scaled.jpg?fit=1200%2C800&ssl=1',
       ingredients: [
         { name: 'Chicken Breast', amount: 2 },
         { name: 'Romaine Lettuce', amount: 150 },
@@ -38,7 +38,8 @@ export class RecipeService {
     {
       name: 'Vegetable Stir-fry',
       description: 'A healthy and colorful mix of stir-fried vegetables.',
-      imgPath: 'https://st2.depositphotos.com/1000589/10112/i/450/depositphotos_101121174-stock-photo-vegetable-stir-fry-in-a.jpg',
+      imgPath:
+        'https://st2.depositphotos.com/1000589/10112/i/450/depositphotos_101121174-stock-photo-vegetable-stir-fry-in-a.jpg',
       ingredients: [
         { name: 'Broccoli', amount: 100 },
         { name: 'Carrots', amount: 100 },
@@ -52,7 +53,8 @@ export class RecipeService {
     {
       name: 'Pancakes',
       description: 'Fluffy and light pancakes served with syrup.',
-      imgPath: 'https://media.istockphoto.com/id/96430985/photo/pancakes.jpg?s=612x612&w=0&k=20&c=jB8amkXMUpobVZh9vlx1qJb-qk2oz-jZJIbH0O3wLO4=',
+      imgPath:
+        'https://media.istockphoto.com/id/96430985/photo/pancakes.jpg?s=612x612&w=0&k=20&c=jB8amkXMUpobVZh9vlx1qJb-qk2oz-jZJIbH0O3wLO4=',
       ingredients: [
         { name: 'Flour', amount: 200 },
         { name: 'Eggs', amount: 2 },
@@ -81,7 +83,7 @@ export class RecipeService {
 
   recipes = this.recipesP.asReadonly();
 
-  selectRecipe(recipe: Recipe) {
-    this.recipeSelected.emit(recipe);
+  getRecipe(index: number) {
+    return this.recipesP()[index];
   }
 }
