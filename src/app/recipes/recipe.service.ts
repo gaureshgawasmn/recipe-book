@@ -69,7 +69,7 @@ export class RecipeService {
       name: 'Margarita Pizza',
       description:
         'A simple yet delicious pizza with fresh tomatoes, mozzarella, and basil.',
-      imgPath: 'https://thumbs.dreamstime.com/b/pizza-margherita-27409337.jpg',
+      imgPath: 'https://media.istockphoto.com/id/686957124/photo/pizza-margherita.jpg?s=612x612&w=0&k=20&c=STQALvMIjcgXPIvpXXUXItAl05QtbmEUQ_PfwSato48=',
       ingredients: [
         { name: 'Pizza Dough', amount: 1 },
         { name: 'Tomato Sauce', amount: 100 },
