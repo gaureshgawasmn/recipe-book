@@ -1,0 +1,16 @@
+.list-group-item {
+  display: flex;
+  align-items: center;
+}
+
+.text-content {
+  flex-grow: 1; /* Allow the text to take all available space */
+  margin-right: 10px;
+}
+
+.image-container img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}

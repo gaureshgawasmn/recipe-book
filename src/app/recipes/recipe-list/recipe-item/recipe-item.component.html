@@ -3,18 +3,13 @@
   [routerLink]="[index()]"
   routerLinkActive="active"
 >
-  <div class="pull-left">
+  <div class="pull-left text-content">
     <h4 class="list-group-item-heading">{{ recipe().name }}</h4>
     <p class="list-group-item-text">
       {{ recipe().description }}
     </p>
   </div>
-  <span class="pull-right">
-    <img
-      [src]="recipe().imgPath"
-      alt=""
-      class="img-responsive"
-      style="max-height: 50px"
-    />
-  </span>
+  <div class="image-container">
+    <img [src]="recipe().imgPath" alt="" class="image-responsive fixed-image" />
+  </div>
 </a>
