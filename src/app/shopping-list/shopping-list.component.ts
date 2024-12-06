@@ -12,9 +12,13 @@ import { ShoppingListService } from './shopping-list.service';
 })
 export class ShoppingListComponent {
   ingredients: Ingredient[] = [];
-  private shoppingListService = inject(ShoppingListService);
+  private readonly shoppingListService = inject(ShoppingListService);
 
   constructor() {
     this.ingredients = this.shoppingListService.allIngredients();
+  }
+
+  onEditItem(index: number) {
+    this.shoppingListService.startedEditing.next(index);
   }
 }
