@@ -1,5 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { map } from 'rxjs';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
@@ -37,3 +42,14 @@ export class DataStorageService {
       });
   }
 }
+
+export const fetchRecipesResolver: ResolveFn<void> = (
+  activatedRoute: ActivatedRouteSnapshot,
+  routerState: RouterStateSnapshot
+) => {
+  const dataStorageService = inject(DataStorageService);
+  const recipeService = inject(RecipeService);
+  if(recipeService.recipes().length === 0){
+    dataStorageService.fetchRecipes();
+  }
+};

@@ -3,6 +3,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeHomeComponent } from './recipes/recipe-home/recipe-home.component';
 import { RecipesComponent } from './recipes/recipes.component';
+import { fetchRecipesResolver } from './shared/data-storage.service';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
   {
     path: 'recipes',
     component: RecipesComponent,
+    resolve: { voidAction: fetchRecipesResolver },
     children: [
       {
         path: '',
