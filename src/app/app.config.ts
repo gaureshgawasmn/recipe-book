@@ -5,6 +5,10 @@ import {
   withRouterConfig,
 } from '@angular/router';
 
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -17,5 +21,6 @@ export const appConfig: ApplicationConfig = {
         paramsInheritanceStrategy: 'always', // this will give access of parent component url param in child component
       })
     ),
+    provideHttpClient(withInterceptorsFromDi()),
   ],
 };

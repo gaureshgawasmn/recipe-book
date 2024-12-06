@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 
@@ -12,10 +11,6 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
   styleUrl: './recipe-list.component.css',
 })
 export class RecipeListComponent {
-  recipes: Recipe[] = [];
   private readonly recipeService = inject(RecipeService);
-
-  ngOnInit() {
-    this.recipes = this.recipeService.recipes();
-  }
+  recipes = computed(() => this.recipeService.recipes());
 }

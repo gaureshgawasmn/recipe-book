@@ -83,7 +83,13 @@ export class RecipeService {
     },
   ]);
 
-  recipes = this.recipesP.asReadonly();
+  get recipes() {
+    return this.recipesP.asReadonly();
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipesP.set(recipes);
+  }
 
   getRecipe(index: number) {
     return this.recipesP()[index];
