@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipeService } from '../recipes/recipe.service';
 
@@ -13,7 +14,7 @@ export class DataStorageService {
   private recipeService = inject(RecipeService);
 
   saveRecipes() {
-    const recipes = this.recipeService.recipes;
+    const recipes = this.recipeService.recipes();
     this.http
       .put(this.DATA_STORE_URL + '/recipes.json', recipes)
       .subscribe((response) => console.log(response));
@@ -22,6 +23,13 @@ export class DataStorageService {
   fetchRecipes() {
     this.http
       .get<Recipe[]>(this.DATA_STORE_URL + '/recipes.json')
+      .pipe(
+        map((recipes) => {
+          return recipes.map((recipe) => {
+            return { ...recipe, ingredients: recipe.ingredients || [] };
+          });
+        })
+      )
       .subscribe((recipes) => {
         console.log('Recipes fetch successfully');
         console.log(recipes);
