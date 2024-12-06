@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Recipe } from './recipe.model';
 
 @Injectable({
   providedIn: 'root',
@@ -69,7 +70,8 @@ export class RecipeService {
       name: 'Margarita Pizza',
       description:
         'A simple yet delicious pizza with fresh tomatoes, mozzarella, and basil.',
-      imgPath: 'https://media.istockphoto.com/id/686957124/photo/pizza-margherita.jpg?s=612x612&w=0&k=20&c=STQALvMIjcgXPIvpXXUXItAl05QtbmEUQ_PfwSato48=',
+      imgPath:
+        'https://media.istockphoto.com/id/686957124/photo/pizza-margherita.jpg?s=612x612&w=0&k=20&c=STQALvMIjcgXPIvpXXUXItAl05QtbmEUQ_PfwSato48=',
       ingredients: [
         { name: 'Pizza Dough', amount: 1 },
         { name: 'Tomato Sauce', amount: 100 },
@@ -85,5 +87,17 @@ export class RecipeService {
 
   getRecipe(index: number) {
     return this.recipesP()[index];
+  }
+
+  addRecipe(recipe: Recipe) {
+    this.recipesP().push(recipe);
+  }
+
+  update(index: number, recipe: Recipe) {
+    this.recipesP()[index] = recipe;
+  }
+
+  delete(index: number) {
+    this.recipesP().splice(index, 1);
   }
 }
