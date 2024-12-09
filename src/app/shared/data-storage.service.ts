@@ -49,7 +49,7 @@ export const fetchRecipesResolver: ResolveFn<void> = (
 ) => {
   const dataStorageService = inject(DataStorageService);
   const recipeService = inject(RecipeService);
-  if(recipeService.recipes().length === 0){
+  if (recipeService.recipes().length === 0) {
     dataStorageService.fetchRecipes();
   }
 };

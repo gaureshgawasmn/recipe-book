@@ -5,11 +5,9 @@ import {
   withRouterConfig,
 } from '@angular/router';
 
-import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
+import { authInterceptor } from './auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +19,6 @@ export const appConfig: ApplicationConfig = {
         paramsInheritanceStrategy: 'always', // this will give access of parent component url param in child component
       })
     ),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
 };

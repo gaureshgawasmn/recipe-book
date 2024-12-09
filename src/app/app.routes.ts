@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
+import { authGuard } from './auth/auth.gaurd';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeHomeComponent } from './recipes/recipe-home/recipe-home.component';
@@ -16,6 +18,7 @@ export const routes: Routes = [
     path: 'recipes',
     component: RecipesComponent,
     resolve: { voidAction: fetchRecipesResolver },
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -38,5 +41,9 @@ export const routes: Routes = [
   {
     path: 'shopping-list',
     component: ShoppingListComponent,
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
 ];

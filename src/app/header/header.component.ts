@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 import { DataStorageService } from '../shared/data-storage.service';
 import { DropdownDirective } from '../shared/dropdown.directive';
 
@@ -11,6 +12,13 @@ import { DropdownDirective } from '../shared/dropdown.directive';
 })
 export class HeaderComponent {
   dataStorageService = inject(DataStorageService);
+  authService = inject(AuthService);
+
+  authUser = computed(() => this.authService.user());
+
+  get isLoggedIn() {
+    return this.authUser() != null;
+  }
 
   saveData() {
     this.dataStorageService.saveRecipes();
@@ -18,5 +26,9 @@ export class HeaderComponent {
 
   fetchData() {
     this.dataStorageService.fetchRecipes();
+  }
+
+  logOut() {
+    this.authService.logOut();
   }
 }

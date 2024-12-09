@@ -5,14 +5,24 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
+        @if(isLoggedIn){
         <li routerLinkActive="active">
           <a routerLink="/recipes">Recipes</a>
         </li>
+        } @if(!isLoggedIn){
+        <li routerLinkActive="active">
+          <a routerLink="/auth">Authenticate</a>
+        </li>
+        }
         <li routerLinkActive="active">
           <a routerLink="/shopping-list">Shopping List</a>
         </li>
       </ul>
+      @if(isLoggedIn){
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="clickable" (click)="logOut()">Logout</a>
+        </li>
         <li class="dropdown" appDropdown>
           <a class="dropdown-toggle clickable"
             >Manage <span class="caret"></span
@@ -27,6 +37,7 @@
           </ul>
         </li>
       </ul>
+      }
     </div>
   </div>
 </nav>
