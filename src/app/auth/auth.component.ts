@@ -1,19 +1,24 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AlertComponent } from '../shared/alert/alert/alert.component';
 import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import { PlaceHolderDirective } from '../shared/place-holder/place-holder.directive';
 import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule, LoadingSpinnerComponent],
+  imports: [FormsModule, LoadingSpinnerComponent, PlaceHolderDirective],
   templateUrl: './auth.component.html',
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
   isLoginMode = true;
   isLoading = false;
-  error: string | null = null;
+  closeSub: Subscription | undefined;
+  @ViewChild(PlaceHolderDirective)
+  alertHost!: PlaceHolderDirective;
 
   authService = inject(AuthService);
   router = inject(Router);
@@ -46,11 +51,29 @@ export class AuthComponent {
         this.isLoading = false;
       },
       error: (error: Error) => {
-        this.error = error.message;
+        this.showError(error.message);
         this.isLoading = false;
       },
     });
 
     authForm.reset();
+  }
+
+  private showError(message: string) {
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const alertComponentRef =
+      hostViewContainerRef.createComponent(AlertComponent);
+    alertComponentRef.instance.message = message;
+
+    this.closeSub = alertComponentRef.instance.close.subscribe(() => {
+      hostViewContainerRef.clear();
+      this.closeSub?.unsubscribe();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.closeSub?.unsubscribe();
   }
 }
