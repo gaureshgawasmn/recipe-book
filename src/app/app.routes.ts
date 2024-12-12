@@ -17,13 +17,14 @@ export const routes: Routes = [
   },
   {
     path: 'shopping-list',
-    loadChildren: () =>
-      import('./shopping-list/shopping-list.routes').then(
-        (m) => m.shoppingListRoutes
+    loadComponent: () =>
+      import('./shopping-list/shopping-list.component').then(
+        (c) => c.ShoppingListComponent
       ),
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.routes').then((m) => m.authRoutes),
+    loadComponent: () =>
+      import('./auth/auth.component').then((c) => c.AuthComponent),
   },
 ];
